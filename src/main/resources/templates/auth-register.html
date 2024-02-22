@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-      <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>MobiLeLeLe</title>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
@@ -14,7 +15,7 @@
 <body>
 
 <div>
-     <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
         <a class="navbar-brand" href="/"><img alt="car picture" src="/img/car.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
                 <li class="nav-item"
-                    >
+                >
                     <a class="nav-link" href="/brands/all">All Brands</a>
                 </li>
                 <li class="nav-item">
@@ -52,14 +53,14 @@
                         <a class="nav-link" href="/users/logout">Logout</a>
                     </div>
                 </li>
-                
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users/register">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users/login">Login</a>
-                    </li>
-                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login">Login</a>
+                </li>
+
             </ul>
         </div>
     </nav>
@@ -67,12 +68,21 @@
 
 <div class="container">
     <h2 class="text-center text-white">Register User</h2>
-    <form method="POST" 
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+
+    <!-- Register FORM start -->
+
+    <form
+            th:action="@{/users/register}"
+            th:method="post"
+
+            class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input  id="firstName" type="text" min="2" max="20" class="form-control"
+                <input id="firstName"
+                       name="firstName"
+                       type="text"
+                       class="form-control"
                        placeholder="First name"/>
                 <p class="errors alert alert-danger">
                     First name is required.
@@ -80,54 +90,80 @@
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
-                <input id="lastName" type="text" min="2" max="20" class="form-control"
-                       placeholder="First name"/>
+                <input
+                        id="lastName"
+                        name="lastName"
+                        type="text"
+                        class="form-control"
+                       placeholder="Last name"/>
                 <p class="errors alert alert-danger">
                     Last name is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="email" class="text-white font-weight-bold">Email</label>
+                <input
+                        id="email"
+                        name="email"
+                        type="text"
+                        class="form-control"
+                        placeholder="email"/>
+                <p class="errors alert alert-danger">
+                    Email is required.
                 </p>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="username" class="text-white font-weight-bold">Username</label>
-                <input id="username" type="text" min="2" max="20" class="form-control"
-                       placeholder="First name"/>
-                <p class="errors alert alert-danger">
-                    Username is required.
-                </p>
-            </div>
-            <div class="form-group col-md-6 mb-3">
                 <label for="password" class="text-white font-weight-bold">Password</label>
-                <input id="password" type="password" min="2" max="20" class="form-control"
+                <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        class="form-control"
                        placeholder="Password"/>
                 <p class="errors alert alert-danger">
                     Password is required.
                 </p>
             </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
+                <input
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        type="password"
+                        class="form-control"
+                        placeholder="Confirm password"/>
+                <p class="errors alert alert-danger">
+                    Password confirm is required.
+                </p>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>
-            <select  id="roles" class="form-control" multiple>
-                <option>
-                </option>
-            </select>
-            <p class="errors alert alert-danger">
-                Selecting a role is required.
-            </p>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>-->
+<!--            <select id="roles" class="form-control" multiple>-->
+<!--                <option>-->
+<!--                </option>-->
+<!--            </select>-->
+<!--            <p class="errors alert alert-danger">-->
+<!--                Selecting a role is required.-->
+<!--            </p>-->
+<!--        </div>-->
 
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Submit Offer"/>
+                    <input type="submit" class="btn btn-info btn-lg" value="Register"/>
                 </div>
             </div>
         </div>
     </form>
+
+    <!-- EO: Register FORM end -->
 </div>
 
 <div>
-     <footer> </footer>
+    <footer></footer>
 </div>
 
 </body>
