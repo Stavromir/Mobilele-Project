@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mobilele?createDatabaseIfNotExist=true
-    username: root
-    password: choban1na
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:}
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     properties:

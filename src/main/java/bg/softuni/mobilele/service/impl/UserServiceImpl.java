@@ -1,5 +1,6 @@
 package bg.softuni.mobilele.service.impl;
 
+import bg.softuni.mobilele.model.dto.UserLoginDto;
 import bg.softuni.mobilele.model.dto.UserRegistrationDto;
 import bg.softuni.mobilele.model.entity.User;
 import bg.softuni.mobilele.repository.UserRepository;
@@ -12,21 +13,24 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     public void registerUser(UserRegistrationDto userRegistrationDto) {
 
         userRepository.save(map(userRegistrationDto));
 
+    }
+
+    @Override
+    public boolean loginUser(UserLoginDto userLoginDto) {
+        return false;
     }
 
     private User map (UserRegistrationDto userRegistrationDto) {
