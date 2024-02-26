@@ -15,6 +15,14 @@ public class UserLoginController {
         this.userService = userService;
     }
 
+    @GetMapping("users/logout")
+    public String logout() {
+
+        userService.logoutUser();
+
+        return "index";
+    }
+
     @GetMapping("/users/login")
     public String login() {
         return "auth-login";
@@ -26,6 +34,6 @@ public class UserLoginController {
 
         boolean loginSuccessful = userService.loginUser(userLoginDto);
 
-        return loginSuccessful ? "/" : "auth-login";
+        return loginSuccessful ? "index" : "auth-login";
     }
 }

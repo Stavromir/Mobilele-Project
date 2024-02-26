@@ -3,7 +3,7 @@ package bg.softuni.mobilele.util;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-@Component
+@Component("currentUser")
 @SessionScope
 public class CurrentUser {
 
@@ -45,5 +45,15 @@ public class CurrentUser {
                 ", lastName='" + lastName + '\'' +
                 ", isLogged=" + isLogged +
                 '}';
+    }
+
+    public void logout() {
+        setLogged(false);
+        setFirstName(null);
+        setLastName(null);
+    }
+
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
     }
 }
