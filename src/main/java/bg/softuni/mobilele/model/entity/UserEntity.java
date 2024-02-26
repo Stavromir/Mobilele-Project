@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class UserEntity extends BaseEntity{
 
     private String email;
     private String password;
@@ -14,7 +14,7 @@ public class User extends BaseEntity{
     private String lastName;
     private Boolean active;
 
-    public User() {
+    public UserEntity() {
         super();
     }
 
@@ -24,7 +24,7 @@ public class User extends BaseEntity{
     }
 
 
-    public User setEmail(String email) {
+    public UserEntity setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -34,7 +34,7 @@ public class User extends BaseEntity{
         return password;
     }
 
-    public User setPassword(String password) {
+    public UserEntity setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -43,7 +43,7 @@ public class User extends BaseEntity{
         return firstName;
     }
 
-    public User setFirstName(String firstName) {
+    public UserEntity setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -52,7 +52,7 @@ public class User extends BaseEntity{
         return lastName;
     }
 
-    public User setLastName(String lastName) {
+    public UserEntity setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -61,7 +61,7 @@ public class User extends BaseEntity{
         return active;
     }
 
-    public User setActive(Boolean active) {
+    public UserEntity setActive(Boolean active) {
         this.active = active;
         return this;
     }

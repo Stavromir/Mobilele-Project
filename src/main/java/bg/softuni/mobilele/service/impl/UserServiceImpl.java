@@ -2,11 +2,10 @@ package bg.softuni.mobilele.service.impl;
 
 import bg.softuni.mobilele.model.dto.UserLoginDto;
 import bg.softuni.mobilele.model.dto.UserRegistrationDto;
-import bg.softuni.mobilele.model.entity.User;
+import bg.softuni.mobilele.model.entity.UserEntity;
 import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.service.UserService;
 import bg.softuni.mobilele.util.CurrentUser;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -65,8 +64,8 @@ public class UserServiceImpl implements UserService {
         currentUser.logout();
     }
 
-    private User map (UserRegistrationDto userRegistrationDto) {
-        return new User()
+    private UserEntity map (UserRegistrationDto userRegistrationDto) {
+        return new UserEntity()
                 .setActive(true)
                 .setEmail(userRegistrationDto.email())
                 .setFirstName(userRegistrationDto.firstName())
