@@ -1,12 +1,11 @@
 package bg.softuni.mobilele.web;
 
 import bg.softuni.mobilele.model.dto.CreateOfferDto;
+import bg.softuni.mobilele.model.enums.EngineEnum;
 import bg.softuni.mobilele.service.OfferService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -26,8 +25,13 @@ public class OfferController {
         return "offers";
     }
 
+    @ModelAttribute("engines")
+    public EngineEnum[] engines() {
+        return EngineEnum.values();
+    }
+
     @GetMapping("/add")
-    public String add() {
+    public String add(Model model) {
         return "offer-add";
     }
 
