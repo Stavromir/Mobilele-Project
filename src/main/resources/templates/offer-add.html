@@ -19,18 +19,26 @@
           class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
 
+            <!-- MODEL -->
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="model">Model</label>
-                <select id="model" class="form-control">
+                <select id="model"
+                        name="model"
+                        class="form-control">
                     <option value="">- Select a model -</option>
-                    <optgroup label="Brand name">
-                        <option>Model</option>
+                    <optgroup th:each="b : ${models}"
+                              th:text="${b}"
+                              th:value="${b}">
+                        <option>
+                            Model
+                        </option>
                     </optgroup>
                 </select>
                 <p class="errors alert alert-danger">
                     Vechicle model is required.
                 </p>
             </div>
+            <!-- EO: MODEL -->
 
             <!-- PRICE -->
             <div class="form-group col-md-6 mb-3">

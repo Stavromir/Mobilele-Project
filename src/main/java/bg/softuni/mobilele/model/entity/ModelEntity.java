@@ -20,12 +20,13 @@ public class ModelEntity extends BaseEntity {
         return name;
     }
 
-    @Enumerated(EnumType.STRING)
+
     public ModelEntity setName(String name) {
         this.name = name;
         return this;
     }
 
+    @Enumerated(EnumType.STRING)
     public ModelCategoryEnum getCategory() {
         return category;
     }
