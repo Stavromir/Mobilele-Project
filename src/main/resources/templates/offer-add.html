@@ -112,9 +112,15 @@
                        type="number"
                        class="form-control"
                        placeholder="Manufacturing year"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Manufacturing year is required.
-                </p>
+
+                    <p th:if="${#fields.hasErrors('year')}"
+                       class="errors alert alert-danger"
+                       th:errors="*{year}"
+                    >
+                    </p>
+<!--                <p class="invalid-feedback errors alert alert-danger">-->
+<!--                    Manufacturing year is required.-->
+<!--                </p>-->
             </div>
             <!-- EO: YEAR -->
 

@@ -2,6 +2,7 @@ package bg.softuni.mobilele.model.dto;
 
 import bg.softuni.mobilele.model.enums.EngineEnum;
 import bg.softuni.mobilele.model.enums.TransmissionEnum;
+import bg.softuni.mobilele.model.validation.YearNotInTheFuture;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
@@ -9,14 +10,29 @@ import java.util.Objects;
 
 public class CreateOfferDto {
 
-    private @NotEmpty @Size(min = 5, max = 512) String description;
-    private @Positive @NotNull Long modelId;
-    private @NotNull EngineEnum engine;
-    private @NotNull TransmissionEnum transmission;
-    private @NotEmpty String imageUrl;
-    private @Positive @NotNull Integer mileage;
-    private @Positive @NotNull Integer price;
-    private @Positive @Min(1930) @NotNull Integer year;
+    @NotEmpty
+    @Size(min = 5, max = 512)
+    private String description;
+    @Positive
+    @NotNull
+    private Long modelId;
+    @NotNull
+    private EngineEnum engine;
+    @NotNull
+    private TransmissionEnum transmission;
+    @NotEmpty
+    private String imageUrl;
+    @Positive
+    @NotNull
+    private Integer mileage;
+    @Positive
+    @NotNull
+    private Integer price;
+    @YearNotInTheFuture(message = "Enter correct year")
+    @Positive
+    @Min(1930)
+    @NotNull
+    private Integer year;
 
     public CreateOfferDto() {
     }
