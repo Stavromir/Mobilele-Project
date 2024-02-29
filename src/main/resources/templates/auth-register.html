@@ -17,6 +17,7 @@
     <!-- Register FORM start -->
 
     <form
+            th:object="${userRegistrationDto}"
             th:action="@{/users/register}"
             th:method="POST"
 
@@ -25,11 +26,12 @@
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
                 <input id="firstName"
-                       name="firstName"
+                       th:field="*{firstName}"
+                       th:errorclass="is-invalid"
                        type="text"
                        class="form-control"
                        placeholder="First name"/>
-                <p class="errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     First name is required.
                 </p>
             </div>

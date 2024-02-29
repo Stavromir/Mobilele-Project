@@ -16,4 +16,8 @@ public record UserRegistrationDto(@NotEmpty String firstName,
                                   @NotNull @Email @UniqueUserEmail String email,
                                   String password,
                                   String confirmPassword) {
+
+    public static UserRegistrationDto empty () {
+        return  new UserRegistrationDto(null, null, null, null, null);
+    }
 }
