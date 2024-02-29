@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/offers")
+@RequestMapping("/offer")
 public class OfferController {
 
     private final OfferService offerService;
@@ -25,11 +25,6 @@ public class OfferController {
         this.brandService = brandService;
     }
 
-
-    @GetMapping("/all")
-    public String all() {
-        return "offers";
-    }
 
     @ModelAttribute("engines")
     public EngineEnum[] engines() {

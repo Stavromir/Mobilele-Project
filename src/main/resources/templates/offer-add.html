@@ -26,9 +26,8 @@
                         name="model"
                         class="form-control">
                     <option value="">- Select a model -</option>
-                    <optgroup th:each="b : ${models}"
-                              th:text="${b}"
-                              th:value="${b}">
+                    <optgroup th:each="m : ${models}"
+                              th:label="${m.name}">
                         <option>
                             Model
                         </option>
