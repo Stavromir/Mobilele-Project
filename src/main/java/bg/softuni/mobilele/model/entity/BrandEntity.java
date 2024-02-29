@@ -6,6 +6,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "brands")
+@NamedEntityGraph(
+        name = "brandsWithModels",
+        attributeNodes = @NamedAttributeNode("models")
+)
 public class BrandEntity extends BaseEntity {
 
     private String name;
@@ -24,7 +28,7 @@ public class BrandEntity extends BaseEntity {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     public List<ModelEntity> getModels() {
         return models;
     }

@@ -1,8 +1,12 @@
 package bg.softuni.mobilele.service.impl;
 
 import bg.softuni.mobilele.model.dto.CreateOfferDto;
+import bg.softuni.mobilele.model.entity.ModelEntity;
+import bg.softuni.mobilele.model.entity.OfferEntity;
+import bg.softuni.mobilele.repository.ModelRepository;
 import bg.softuni.mobilele.repository.OfferRepository;
 import bg.softuni.mobilele.service.OfferService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -11,14 +15,30 @@ import java.util.UUID;
 public class OfferServiceImpl implements OfferService {
 
     private final OfferRepository offerRepository;
+    private final ModelRepository modelRepository;
+    private final ModelMapper modelMapper;
 
-    public OfferServiceImpl(OfferRepository offerRepository) {
+    public OfferServiceImpl(OfferRepository offerRepository,
+                            ModelRepository modelRepository,
+                            ModelMapper modelMapper) {
         this.offerRepository = offerRepository;
+        this.modelRepository = modelRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public UUID createOffer(CreateOfferDto createOfferDto) {
-        //todo
-        throw new UnsupportedOperationException("Coming soon!");
+
+        OfferEntity newOffer = modelMapper.map(createOfferDto, OfferEntity.class);
+        newOffer.setUuid(UUID.randomUUID());
+
+        ModelEntity model = modelRepository.findById(createOfferDto.getModelId()).orElseThrow(() ->
+                new IllegalArgumentException("Model with id " + createOfferDto.getModelId() + " not found"));
+
+        newOffer.setModel(model);
+
+        newOffer = offerRepository.save(newOffer);
+
+        return newOffer.getUuid();
     }
 }
