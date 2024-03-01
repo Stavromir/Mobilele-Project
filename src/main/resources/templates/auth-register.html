@@ -39,11 +39,12 @@
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
                 <input
                         id="lastName"
-                        name="lastName"
+                        th:field="*{lastName}"
+                        th:errorclass="is-invalid"
                         type="text"
                         class="form-control"
                        placeholder="Last name"/>
-                <p class="errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Last name is required.
                 </p>
             </div>
@@ -51,11 +52,12 @@
                 <label for="email" class="text-white font-weight-bold">Email</label>
                 <input
                         id="email"
-                        name="email"
+                        th:field="*{email}"
+                        th:errorclass="is-invalid"
                         type="text"
                         class="form-control"
                         placeholder="email"/>
-                <p class="errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Email is required.
                 </p>
             </div>
@@ -65,11 +67,12 @@
                 <label for="password" class="text-white font-weight-bold">Password</label>
                 <input
                         id="password"
-                        name="password"
+                        th:field="*{password}"
+                        th:errorclass="is-invalid"
                         type="password"
                         class="form-control"
                        placeholder="Password"/>
-                <p class="errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Password is required.
                 </p>
             </div>
@@ -77,11 +80,11 @@
                 <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
                 <input
                         id="confirmPassword"
-                        name="confirmPassword"
+                        th:field="*{confirmPassword}"
                         type="password"
                         class="form-control"
                         placeholder="Confirm password"/>
-                <p class="errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Password confirm is required.
                 </p>
             </div>
@@ -110,7 +113,13 @@
 </div>
 
 <div>
-    <footer></footer>
+    <footer class="footer bg-blur rounded">
+        <div class="container-fluid text-center">
+            <div class="h5 text-white">
+                &copy; Lucho, Chocho & Spring Fundamentals Students 2024. All rights reserved.
+            </div>
+        </div>
+    </footer>
 </div>
 
 </body>

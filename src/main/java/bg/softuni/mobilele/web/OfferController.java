@@ -60,7 +60,6 @@ public class OfferController {
             return "redirect:add";
         }
 
-
         UUID newOfferUUID = offerService.createOffer(createOfferDto);
 
         return "redirect:/offer/" + newOfferUUID    ;
