@@ -11,11 +11,13 @@ import jakarta.validation.constraints.NotNull;
         second = "confirmPassword",
         message = "Password should match"
 )
-public record UserRegistrationDto(@NotEmpty String firstName,
-                                  @NotEmpty String lastName,
-                                  @NotNull @Email @UniqueUserEmail String email,
-                                  String password,
-                                  String confirmPassword) {
+public record UserRegistrationDto(
+
+        @NotEmpty String firstName,
+        @NotEmpty String lastName,
+        @NotEmpty @Email @UniqueUserEmail String email,
+        @NotEmpty String password,
+        @NotEmpty String confirmPassword) {
 
     public static UserRegistrationDto empty () {
         return  new UserRegistrationDto(null, null, null, null, null);

@@ -28,7 +28,7 @@ public class UserRegistrationController {
     @GetMapping("/register")
     public String register(Model model) {
 
-        if (!model.containsAttribute("userRegistrationDto")) {
+        if (!model.containsAttribute("userRegistrationDto")){
             model.addAttribute("userRegistrationDto", UserRegistrationDto.empty());
         }
 
@@ -36,7 +36,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping("/register")
-    public String register (@Valid UserRegistrationDto userRegistrationDto,
+    public String registerConfirm (@Valid UserRegistrationDto userRegistrationDto,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes){
 
@@ -45,9 +45,10 @@ public class UserRegistrationController {
         if (bindingResult.hasErrors()) {
             redirectAttributes
                     .addFlashAttribute("userRegistrationDto", userRegistrationDto)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDto");
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationDto",
+                            bindingResult);
 
-            return "redirect:register";
+            return "redirect:/users/register";
         }
 
         userService.registerUser(userRegistrationDto);

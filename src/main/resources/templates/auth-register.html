@@ -25,13 +25,14 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input id="firstName"
-                       th:field="*{firstName}"
-                       th:errorclass="is-invalid"
-                       type="text"
-                       class="form-control"
-                       placeholder="First name"/>
-                <p class="invalid-feedback errors alert alert-danger">
+                <input
+                        id="firstName"
+                        th:field="*{firstName}"
+
+                        type="text"
+                        class="form-control"
+                        placeholder="First name"/>
+                <p class="errors alert alert-danger">
                     First name is required.
                 </p>
             </div>
@@ -57,9 +58,14 @@
                         type="text"
                         class="form-control"
                         placeholder="email"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Email is required.
+
+                <p th:if="${#fields.hasErrors('email')}"
+                   class="invalid-feedback errors alert alert-danger"
+                   th:errors="*{email}">
                 </p>
+<!--                <p class="invalid-feedback errors alert alert-danger">-->
+<!--                    Email is required.-->
+<!--                </p>-->
             </div>
         </div>
         <div class="row">
@@ -84,9 +90,14 @@
                         type="password"
                         class="form-control"
                         placeholder="Confirm password"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Password confirm is required.
+
+                <p th:if="${#fields.hasErrors('confirmPassword')}"
+                   class="errors alert alert-danger"
+                   th:errors="*{confirmPassword}">
                 </p>
+<!--                <p class="invalid-feedback errors alert alert-danger">-->
+<!--                    Password confirm is required.-->
+<!--                </p>-->
             </div>
         </div>
 <!--        <div class="form-group">-->
@@ -113,12 +124,7 @@
 </div>
 
 <div>
-    <footer class="footer bg-blur rounded">
-        <div class="container-fluid text-center">
-            <div class="h5 text-white">
-                &copy; Lucho, Chocho & Spring Fundamentals Students 2024. All rights reserved.
-            </div>
-        </div>
+    <footer>
     </footer>
 </div>
 

@@ -70,6 +70,6 @@ public class UserServiceImpl implements UserService {
                 .setEmail(userRegistrationDto.email())
                 .setFirstName(userRegistrationDto.firstName())
                 .setLastName(userRegistrationDto.lastName())
-                .setPassword(passwordEncoder.encode(userRegistrationDto.password()));
+                .setPassword(passwordEncoder.encode(userRegistrationDto.lastName()));
     }
 }

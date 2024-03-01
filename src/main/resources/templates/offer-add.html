@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace = "~{fragments/head}">
+<head th:replace="~{fragments/head}">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
             th:action="@{/offer/add}"
             th:method="POST"
             th:object="${createOfferDto}"
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
 
             <!-- MODEL -->
@@ -52,7 +52,7 @@
                        th:errorclass="is-invalid"
                        type="number" class="form-control"
                        placeholder="Suggested price"/>
-                <p  class="invalid-feedback errors alert alert-danger">
+                <p class="invalid-feedback errors alert alert-danger">
                     Suggested price is required.
                 </p>
             </div>
@@ -94,9 +94,13 @@
                             th:selected="${t} == *{transmission}">
                     </option>
                 </select>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Transmission type is required.
+                <p th:if="${#fields.hasErrors('transmission')}"
+                   class="errors alert alert-danger"
+                   th:errors="*{transmission}">
                 </p>
+<!--                <p class="invalid-feedback errors alert alert-danger">-->
+<!--                    Transmission type is required.-->
+<!--                </p>-->
             </div>
             <!-- EO: TRANSMISSION -->
 
@@ -113,12 +117,11 @@
                        class="form-control"
                        placeholder="Manufacturing year"/>
 
-                    <p th:if="${#fields.hasErrors('year')}"
-                       class="errors alert alert-danger"
-                       th:errors="*{year}"
-                    >
-                    </p>
-<!--                <p class="invalid-feedback errors alert alert-danger">-->
+                <p th:if="${#fields.hasErrors('year')}"
+                   class="errors alert alert-danger"
+                   th:errors="*{year}">
+                </p>
+<!--                <p class="errors alert alert-danger">-->
 <!--                    Manufacturing year is required.-->
 <!--                </p>-->
             </div>
@@ -179,7 +182,7 @@
 </div>
 
 <div>
-    <footer> </footer>
+    <footer></footer>
 </div>
 
 </body>

@@ -18,7 +18,7 @@ public class CreateOfferDto {
     private Long modelId;
     @NotNull
     private EngineEnum engine;
-    @NotNull
+    @NotNull(message = "Transmission type is required.")
     private TransmissionEnum transmission;
     @NotEmpty
     private String imageUrl;
@@ -31,7 +31,7 @@ public class CreateOfferDto {
     @YearNotInTheFuture(message = "Enter correct year")
     @Positive
     @Min(1930)
-    @NotNull
+    @NotNull(message = "Manufacturing year is required.")
     private Integer year;
 
     public CreateOfferDto() {
