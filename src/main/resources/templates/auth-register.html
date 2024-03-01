@@ -28,25 +28,26 @@
                 <input
                         id="firstName"
                         th:field="*{firstName}"
-
                         type="text"
                         class="form-control"
                         placeholder="First name"/>
-                <p class="errors alert alert-danger">
-                    First name is required.
+                <p th:if="${#fields.hasErrors('firstName')}"
+                   class="errors alert alert-danger"
+                   th:errors="*{firstName}">
                 </p>
+
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="lastName" class="text-white font-weight-bold">Last Name</label>
                 <input
                         id="lastName"
                         th:field="*{lastName}"
-                        th:errorclass="is-invalid"
                         type="text"
                         class="form-control"
                        placeholder="Last name"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Last name is required.
+                <p th:if="${#fields.hasErrors('lastName')}"
+                   class="errors alert alert-danger"
+                   th:errors="*{lastName}">
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
@@ -54,18 +55,15 @@
                 <input
                         id="email"
                         th:field="*{email}"
-                        th:errorclass="is-invalid"
                         type="text"
                         class="form-control"
-                        placeholder="email"/>
+                        placeholder="Email"/>
 
                 <p th:if="${#fields.hasErrors('email')}"
-                   class="invalid-feedback errors alert alert-danger"
+                   class="errors alert alert-danger"
                    th:errors="*{email}">
                 </p>
-<!--                <p class="invalid-feedback errors alert alert-danger">-->
-<!--                    Email is required.-->
-<!--                </p>-->
+
             </div>
         </div>
         <div class="row">
@@ -74,12 +72,12 @@
                 <input
                         id="password"
                         th:field="*{password}"
-                        th:errorclass="is-invalid"
                         type="password"
                         class="form-control"
                        placeholder="Password"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Password is required.
+                <p th:if="${#fields.hasErrors('password')}"
+                   class="errors alert alert-danger"
+                   th:errors="*{password}">
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
@@ -95,21 +93,8 @@
                    class="errors alert alert-danger"
                    th:errors="*{confirmPassword}">
                 </p>
-<!--                <p class="invalid-feedback errors alert alert-danger">-->
-<!--                    Password confirm is required.-->
-<!--                </p>-->
             </div>
         </div>
-<!--        <div class="form-group">-->
-<!--            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>-->
-<!--            <select id="roles" class="form-control" multiple>-->
-<!--                <option>-->
-<!--                </option>-->
-<!--            </select>-->
-<!--            <p class="errors alert alert-danger">-->
-<!--                Selecting a role is required.-->
-<!--            </p>-->
-<!--        </div>-->
 
         <div class="row">
             <div class="col col-md-4">

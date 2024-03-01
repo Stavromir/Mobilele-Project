@@ -17,7 +17,7 @@ public @interface FieldMatch {
 
     String second();
 
-    String message () default "Fields should match";
+    String message () default "Fields should match.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

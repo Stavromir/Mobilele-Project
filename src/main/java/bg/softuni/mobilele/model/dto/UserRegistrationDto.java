@@ -9,15 +9,22 @@ import jakarta.validation.constraints.NotNull;
 @FieldMatch(
         first = "password",
         second = "confirmPassword",
-        message = "Password should match"
+        message = "Password should match."
 )
 public record UserRegistrationDto(
 
-        @NotEmpty String firstName,
-        @NotEmpty String lastName,
-        @NotEmpty @Email @UniqueUserEmail String email,
-        @NotEmpty String password,
-        @NotEmpty String confirmPassword) {
+        @NotEmpty (message = "First name is required.")
+        String firstName,
+        @NotEmpty (message = "Last name is required.")
+        String lastName,
+        @NotEmpty (message = "Email is required.")
+        @Email (message = "Valid email is required.")
+        @UniqueUserEmail
+        String email,
+        @NotEmpty (message = "Password is required.")
+        String password,
+        @NotEmpty (message = "Password confirm is required.")
+        String confirmPassword) {
 
     public static UserRegistrationDto empty () {
         return  new UserRegistrationDto(null, null, null, null, null);

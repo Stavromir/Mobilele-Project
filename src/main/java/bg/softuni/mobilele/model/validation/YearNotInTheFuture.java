@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = YearNotInTheFutureValidator.class)
 public @interface YearNotInTheFuture {
 
-    String message () default "Year should not be in the future";
+    String message () default "Year should not be in the future.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

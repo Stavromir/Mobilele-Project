@@ -57,3 +57,7 @@ form.main-form {
 .logged-user {
      color: white;
 }
+
+.alert{
+     margin-top: 2px;
+}
