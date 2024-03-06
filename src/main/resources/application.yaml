@@ -27,6 +27,18 @@ logging:
     org.hibernate.orm.jdbc.bind: TRACE
 
 
+open.exchange.rates:
+  schema: https
+  host: openexchangerates.org
+  path: /api/latest.json
+  app_id: ${APP_ID:test}
+  symbols: EUR,BGN
+
+https://openexchangerates:
+  org/api/latest:
+    json?app_id=YOUR_APP_ID:
+
+
 
 
 
