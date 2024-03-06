@@ -50,6 +50,7 @@ public class OpenExchangeRateConfig {
         return this;
     }
 
+
     @Override
     public String toString() {
         return "OpenExchangeRateConfig{" +
