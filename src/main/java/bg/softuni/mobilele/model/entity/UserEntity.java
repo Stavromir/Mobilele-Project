@@ -1,8 +1,8 @@
 package bg.softuni.mobilele.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -13,6 +13,7 @@ public class UserEntity extends BaseEntity{
     private String firstName;
     private String lastName;
     private Boolean active;
+    private List<UserRoleEntity> roles;
 
     public UserEntity() {
         super();
@@ -63,6 +64,21 @@ public class UserEntity extends BaseEntity{
 
     public UserEntity setActive(Boolean active) {
         this.active = active;
+        return this;
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    public List<UserRoleEntity> getRoles() {
+        return roles;
+    }
+
+    public UserEntity setRoles(List<UserRoleEntity> roles) {
+        this.roles = roles;
         return this;
     }
 }
