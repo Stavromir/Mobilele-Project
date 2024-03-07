@@ -1,8 +1,10 @@
 package bg.softuni.mobilele.config;
 
+import bg.softuni.mobilele.model.enums.UserRoleEnum;
 import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.service.impl.MobileleUserDetailService;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
 
+
+    private final String rememberMeKey;
+
+    public SecurityConfiguration(@Value("${mobilele.remember.me.key}") String rememberMe) {
+        this.rememberMeKey = rememberMe;
+    }
+
+
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(
@@ -23,7 +33,9 @@ public class SecurityConfiguration {
                         // ALL static resources which are situated in js, images, css are available for everyone
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         // Allow anyone to see the home page, the registration page and the login form
-                        .requestMatchers("/","/offers/all", "/users/login", "users/register", "/users/login-error").permitAll()
+                        .requestMatchers("/", "/users/login", "users/register", "/users/login-error").permitAll()
+                        .requestMatchers("/offers/all").permitAll()
+                        .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         //All other requests are authenticated
                         .anyRequest().authenticated()
         ).formLogin(
@@ -48,9 +60,13 @@ public class SecurityConfiguration {
                             // invalidate the http session
                             .invalidateHttpSession(true);
                 }
+        ).rememberMe(
+                rememberMe -> {
+                    rememberMe.key(rememberMeKey)
+                            .rememberMeParameter("rememberme")
+                            .rememberMeCookieName("rememberme");
+                }
         );
-
-        // TODO: REMEMBER ME
 
         return httpSecurity.build();
     }

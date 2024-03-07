@@ -14,11 +14,16 @@ spring:
       ddl-auto: update
   sql:
     init:
-      mode: always
+      mode: never
   mvc:
     hiddenmethod:
       filter:
         enabled: true
+
+mobilele:
+  remember.me.key: ${REMEMBER_ME_KEY:test}
+
+
 logging:
   level:
 #    org.springframework: DEBUG
