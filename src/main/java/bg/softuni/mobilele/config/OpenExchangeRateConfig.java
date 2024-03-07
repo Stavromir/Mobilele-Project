@@ -13,6 +13,7 @@ public class OpenExchangeRateConfig {
     private List<String> symbols;
     private String host;
     private String schema;
+    private String path;
 
     public String getAppId() {
         return appId;
@@ -50,6 +51,14 @@ public class OpenExchangeRateConfig {
         return this;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public OpenExchangeRateConfig setPath(String path) {
+        this.path = path;
+        return this;
+    }
 
     @Override
     public String toString() {
