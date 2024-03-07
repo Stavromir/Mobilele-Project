@@ -29,7 +29,7 @@ public class RatesInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        if (openExchangeRateConfig.isEnabled()) {
+        if (openExchangeRateConfig.getEnabled()) {
 
             String openExchangeRateUrl =
                     openExchangeRateConfig.getSchema() +

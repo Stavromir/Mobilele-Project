@@ -61,8 +61,13 @@ public class OpenExchangeRateConfig {
         return this;
     }
 
-    public Boolean isEnabled() {
+    public Boolean getEnabled() {
         return enabled;
+    }
+
+    public OpenExchangeRateConfig setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
     }
 
     @Override
