@@ -29,24 +29,27 @@ public class RatesInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        if (openExchangeRateConfig.isEnabled()) {
 
-        String openExchangeRateUrl =
-                openExchangeRateConfig.getSchema() +
-                        "://" +
-                        openExchangeRateConfig.getHost() +
-                        openExchangeRateConfig.getPath() +
-                        "?app_id={app_id}&symbols={symbols}";
+            String openExchangeRateUrl =
+                    openExchangeRateConfig.getSchema() +
+                            "://" +
+                            openExchangeRateConfig.getHost() +
+                            openExchangeRateConfig.getPath() +
+                            "?app_id={app_id}&symbols={symbols}";
 
-        Map<String, String> requestParam = Map.of(
-                "app_id", openExchangeRateConfig.getAppId(),
-                "symbols", String.join(",", openExchangeRateConfig.getSymbols())
-        );
+            Map<String, String> requestParam = Map.of(
+                    "app_id", openExchangeRateConfig.getAppId(),
+                    "symbols", String.join(",", openExchangeRateConfig.getSymbols())
+            );
 
 
-        ExchangeRatesDto exchangeRateDto = restTemplate
-                .getForObject(openExchangeRateUrl, ExchangeRatesDto.class, requestParam);
+            ExchangeRatesDto exchangeRateDto = restTemplate
+                    .getForObject(openExchangeRateUrl, ExchangeRatesDto.class, requestParam);
 
-        currencyService .refreshRates(exchangeRateDto);
+            currencyService.refreshRates(exchangeRateDto);
+
+        }
 
     }
 }

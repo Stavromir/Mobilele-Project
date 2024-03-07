@@ -33,10 +33,7 @@ open.exchange.rates:
   path: /api/latest.json
   app_id: ${APP_ID:test}
   symbols: EUR,BGN
-
-https://openexchangerates:
-  org/api/latest:
-    json?app_id=YOUR_APP_ID:
+  enabled: false
 
 
 

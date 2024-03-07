@@ -14,6 +14,7 @@ public class OpenExchangeRateConfig {
     private String host;
     private String schema;
     private String path;
+    private Boolean enabled;
 
     public String getAppId() {
         return appId;
@@ -60,6 +61,10 @@ public class OpenExchangeRateConfig {
         return this;
     }
 
+    public Boolean isEnabled() {
+        return enabled;
+    }
+
     @Override
     public String toString() {
         return "OpenExchangeRateConfig{" +
@@ -67,6 +72,8 @@ public class OpenExchangeRateConfig {
                 ", symbols=" + symbols +
                 ", host='" + host + '\'' +
                 ", schema='" + schema + '\'' +
+                ", path='" + path + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }
