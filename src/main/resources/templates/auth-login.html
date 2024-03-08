@@ -20,7 +20,7 @@
                 <label for="email" class="text-white font-weight-bold">Email</label>
                 <input
                         id="email"
-                        value="email"
+                        th:value="${email}"
                         name="email"
                         type="text"
                         class="form-control"
@@ -30,7 +30,6 @@
                 <label for="password" class="text-white font-weight-bold">Password</label>
                 <input
                         id="password"
-                        value="password"
                         name="password"
                         type="password"
                         class="form-control"
@@ -45,7 +44,7 @@
                         type="checkbox"
                         class="form-control"/>
             </div>
-            <p class="errors alert alert-danger">
+            <p th:if="${bad_credentials}" class="errors alert alert-danger">
                 Invalid username / password.
             </p>
         </div>
