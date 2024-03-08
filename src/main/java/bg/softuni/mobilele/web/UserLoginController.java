@@ -25,7 +25,4 @@ public class UserLoginController {
         model.addAttribute("bad_credentials", "true");
         return "auth-login";
     }
-
-
-
 }

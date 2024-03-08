@@ -63,9 +63,12 @@ public class SecurityConfiguration {
                 }
         ).rememberMe(
                 rememberMe -> {
-                    rememberMe.key(rememberMeKey)
+                    rememberMe
+                            .key(rememberMeKey)
                             .rememberMeParameter("rememberme")
-                            .rememberMeCookieName("rememberme");
+                            .rememberMeCookieName("rememberme")
+                            // Valid one week
+                            .tokenValiditySeconds(604800);
                 }
         );
 
