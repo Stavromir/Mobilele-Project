@@ -5,8 +5,7 @@ import bg.softuni.mobilele.model.enums.TransmissionEnum;
 
 import java.math.BigDecimal;
 
-public class OfferSummaryDTO {
-
+public class OfferDetailDTO {
 
     private String uuid;
     private String brand;
@@ -18,14 +17,14 @@ public class OfferSummaryDTO {
     private TransmissionEnum transmission;
     private String imageUrl;
 
-    public OfferSummaryDTO() {
+    public OfferDetailDTO() {
     }
 
     public String getUuid() {
         return uuid;
     }
 
-    public OfferSummaryDTO setUuid(String uuid) {
+    public OfferDetailDTO setUuid(String uuid) {
         this.uuid = uuid;
         return this;
     }
@@ -34,7 +33,7 @@ public class OfferSummaryDTO {
         return brand;
     }
 
-    public OfferSummaryDTO setBrand(String brand) {
+    public OfferDetailDTO setBrand(String brand) {
         this.brand = brand;
         return this;
     }
@@ -43,7 +42,7 @@ public class OfferSummaryDTO {
         return model;
     }
 
-    public OfferSummaryDTO setModel(String model) {
+    public OfferDetailDTO setModel(String model) {
         this.model = model;
         return this;
     }
@@ -52,7 +51,7 @@ public class OfferSummaryDTO {
         return year;
     }
 
-    public OfferSummaryDTO setYear(Integer year) {
+    public OfferDetailDTO setYear(Integer year) {
         this.year = year;
         return this;
     }
@@ -61,7 +60,7 @@ public class OfferSummaryDTO {
         return mileage;
     }
 
-    public OfferSummaryDTO setMileage(Long mileage) {
+    public OfferDetailDTO setMileage(Long mileage) {
         this.mileage = mileage;
         return this;
     }
@@ -70,7 +69,7 @@ public class OfferSummaryDTO {
         return price;
     }
 
-    public OfferSummaryDTO setPrice(BigDecimal price) {
+    public OfferDetailDTO setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }
@@ -79,7 +78,7 @@ public class OfferSummaryDTO {
         return engine;
     }
 
-    public OfferSummaryDTO setEngine(EngineEnum engine) {
+    public OfferDetailDTO setEngine(EngineEnum engine) {
         this.engine = engine;
         return this;
     }
@@ -88,7 +87,7 @@ public class OfferSummaryDTO {
         return transmission;
     }
 
-    public OfferSummaryDTO setTransmission(TransmissionEnum transmission) {
+    public OfferDetailDTO setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
         return this;
     }
@@ -97,7 +96,7 @@ public class OfferSummaryDTO {
         return imageUrl;
     }
 
-    public OfferSummaryDTO setImageUrl(String imageUrl) {
+    public OfferDetailDTO setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
