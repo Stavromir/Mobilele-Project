@@ -20,7 +20,7 @@ public class ActivationLinkCleanUpScheduler {
     initialDelay = 10_000)
     public void cleanUp() {
 
-        System.out.println("Trigger of cleanup activation links!"  + LocalDateTime.now());
+//        System.out.println("Trigger of cleanup activation links!"  + LocalDateTime.now());
 
         userActivationService.cleanUpObsoleteActivationLink();
 

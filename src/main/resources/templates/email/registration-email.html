@@ -12,7 +12,9 @@
 <h1>Hello, <th:block th:text="${username}">Pesho</th:block></h1>
 Welcome to mobile!
 
-Please follow the link in order to activate your account.
+Please follow the
+<a class="card-link" th:href="@{http://localhost:8080/user/{activate}(activate=${activationCode})}">Details</a>
+in order to activate your account.
 
 </body>
 </html>

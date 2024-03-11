@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/offers/all").permitAll()
                         .requestMatchers(HttpMethod.GET, "/offer/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/**").permitAll()
                         .requestMatchers("/brands").hasRole(UserRoleEnum.ADMIN.name())
                         //All other requests are authenticated
                         .anyRequest().authenticated()
