@@ -30,7 +30,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(map(userRegistrationDto));
 
         applicationEventPublisher.publishEvent(new UserRegisteredEvent(
-                "userService", userRegistrationDto.email()
+                "userService",
+                userRegistrationDto.email(),
+                userRegistrationDto.firstName()
         ));
     }
 
