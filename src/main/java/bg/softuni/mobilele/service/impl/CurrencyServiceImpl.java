@@ -72,7 +72,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         } else if (to.equals(exchangeRatesDto.base()) && exchangeRatesDto.rates().containsKey(from)) {
             return Optional.of(BigDecimal.ONE.divide(
                     exchangeRatesDto.rates().get(from),
-                    5,
+                    3,
                     RoundingMode.DOWN
             ));
 
@@ -80,7 +80,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         } else if (exchangeRatesDto.rates().containsKey(from) && exchangeRatesDto.rates().containsKey(to)) {
             return Optional.of(exchangeRatesDto.rates().get(to)
                     .divide(exchangeRatesDto.rates().get(from),
-                            5,
+                            3,
                             RoundingMode.DOWN
                     ));
         }

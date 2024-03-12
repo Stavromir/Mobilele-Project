@@ -32,7 +32,7 @@ public class ExchangeRatesEntity {
     }
 
     @NotNull
-    @Column(precision = 9, scale = 6)
+    @Column(precision = 9, scale = 2)
     public BigDecimal getRate() {
         return rate;
     }
