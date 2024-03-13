@@ -29,8 +29,7 @@ public class RatesInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        if (openExchangeRateConfig.getEnabled()) {
-
+        if (openExchangeRateConfig.isEnabled()) {
             String openExchangeRateUrl =
                     openExchangeRateConfig.getSchema() +
                             "://" +
@@ -49,7 +48,7 @@ public class RatesInit implements CommandLineRunner {
 
             currencyService.refreshRates(exchangeRateDto);
 
-        }
 
+        }
     }
 }
