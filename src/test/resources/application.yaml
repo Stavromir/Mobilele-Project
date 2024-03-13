@@ -37,9 +37,9 @@ open.exchange.rates:
 mail:
   mobilele: "mobilele@example.com"
   host: localhost
-  port: 1025
-  username: test
-  password: test@example.com
+  port: 3333
+  username: test@example.com
+  password: topsecret
 
 
 

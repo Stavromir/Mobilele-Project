@@ -1,9 +1,12 @@
 package bg.softuni.mobilele.service.impl;
 
+import bg.softuni.mobilele.model.dto.ConvertRequestDTO;
 import bg.softuni.mobilele.model.dto.ExchangeRatesDto;
+import bg.softuni.mobilele.model.dto.MoneyDto;
 import bg.softuni.mobilele.model.entity.ExchangeRatesEntity;
 import bg.softuni.mobilele.repository.ExchangeRateRepository;
 import bg.softuni.mobilele.service.CurrencyService;
+import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -49,6 +52,18 @@ public class CurrencyServiceImpl implements CurrencyService {
         }
 
         LOGGER.info("Rates refreshed...");
+    }
+
+    @Override
+    public MoneyDto convert(ConvertRequestDTO convertRequestDTO) {
+
+        ExchangeRatesEntity exchangeRatesEntity = exchangeRateRepository.findById(convertRequestDTO.target())
+                .orElseThrow(() -> new ObjectNotFoundException(
+                        "Conversion to target " +
+                                convertRequestDTO.target() + " not possible"));
+
+        return new MoneyDto(convertRequestDTO.target(),
+                exchangeRatesEntity.getRate().multiply(convertRequestDTO.amount()));
     }
 
 
