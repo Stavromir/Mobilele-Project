@@ -1,7 +1,7 @@
 package bg.softuni.mobilele.web;
 
 
-import bg.softuni.mobilele.testUtils.TestData;
+import bg.softuni.mobilele.testUtils.TestDataUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,13 +22,13 @@ class CurrencyRestControllerTestIT {
     private MockMvc mockMvc;
 
     @Autowired
-    private TestData testData;
+    private TestDataUtil testDataUtil;
 
 
     @Test
     public void testConvert() throws Exception {
 
-        this.testData.createExchangeRate("EUR", BigDecimal.valueOf(0.54));
+        this.testDataUtil.createExchangeRate("EUR", BigDecimal.valueOf(0.54));
 
 
         this.mockMvc.perform(
