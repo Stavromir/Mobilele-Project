@@ -46,9 +46,9 @@ public class UserTestDataUtil {
         return userRepository.save(newUser);
     }
 
-    public String createTestOffer(UserEntity owner) {
-
-    }
+//    public String createTestOffer(UserEntity owner) {
+//
+//    }
 
     public void cleanUp() {
         userRepository.deleteAll();

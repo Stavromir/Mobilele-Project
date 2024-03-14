@@ -23,9 +23,9 @@ public class TestDataUtil {
     @Autowired
     private OfferRepository offerRepository;
 
-    public String createTestOffer(UserEntity owner) {
-
-    }
+//    public String createTestOffer(UserEntity owner) {
+//
+//    }
 
 
     public void createExchangeRate(String currency, BigDecimal rate) {

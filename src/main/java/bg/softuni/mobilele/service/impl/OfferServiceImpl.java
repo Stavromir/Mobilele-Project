@@ -13,6 +13,7 @@ import bg.softuni.mobilele.repository.OfferRepository;
 import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.service.MonitoringService;
 import bg.softuni.mobilele.service.OfferService;
+import bg.softuni.mobilele.service.aop.WarnIfExecutionExceeds;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -64,10 +65,12 @@ public class OfferServiceImpl implements OfferService {
         return newOffer.getUuid();
     }
 
+
+    @WarnIfExecutionExceeds(
+            timeInMillis = 1000L
+    )
     @Override
     public Page<OfferSummaryDTO> getAllOffers(Pageable pageable) {
-
-        monitoringService.logOfferSearch();
 
         return offerRepository.findAll(pageable)
                 .map(offerEntity -> {
@@ -79,6 +82,9 @@ public class OfferServiceImpl implements OfferService {
                 });
     }
 
+    @WarnIfExecutionExceeds(
+            timeInMillis = 500L
+    )
     @Override
     public Optional<OfferDetailDTO> getOfferDetail(UUID offerUUID, UserDetails viewer) {
 
@@ -118,12 +124,6 @@ public class OfferServiceImpl implements OfferService {
 
         return offerEntity.getSeller().equals(userEntity);
     }
-
-
-//    private boolean isOwner (OfferEntity offerEntity, UserDetails viewer) {
-//
-//
-//    }
 
     private boolean isAdmin(UserEntity userEntity) {
         return userEntity.getRoles().stream()
