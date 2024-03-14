@@ -69,9 +69,11 @@ public class OfferController {
     }
 
     @GetMapping("/{uuid}")
-    public String details(@PathVariable("uuid") UUID uuid, Model model) {
+    public String details(@PathVariable("uuid") UUID uuid, Model model,
+                          @AuthenticationPrincipal UserDetails viewer) {
 
-        OfferDetailDTO offerDetailDTO = offerService.getOfferDetail(uuid)
+        OfferDetailDTO offerDetailDTO = offerService
+                .getOfferDetail(uuid, viewer)
                 .orElseThrow(() -> new ObjectNotFoundException("Offer with " + uuid + " not found"));
 
         model.addAttribute("offer", offerDetailDTO);

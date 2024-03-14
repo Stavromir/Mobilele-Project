@@ -16,6 +16,8 @@ public class OfferDetailDTO {
     private EngineEnum engine;
     private TransmissionEnum transmission;
     private String imageUrl;
+    private String seller;
+    private boolean viewerIsOwner;
 
     public OfferDetailDTO() {
     }
@@ -103,5 +105,23 @@ public class OfferDetailDTO {
 
     public String summary() {
         return this.brand + " " + this.model + ", " + this.year;
+    }
+
+    public boolean isViewerIsOwner() {
+        return viewerIsOwner;
+    }
+
+    public OfferDetailDTO setViewerIsOwner(boolean viewerIsOwner) {
+        this.viewerIsOwner = viewerIsOwner;
+        return this;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public OfferDetailDTO setSeller(String seller) {
+        this.seller = seller;
+        return this;
     }
 }

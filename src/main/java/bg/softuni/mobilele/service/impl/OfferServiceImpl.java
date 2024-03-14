@@ -6,6 +6,8 @@ import bg.softuni.mobilele.model.dto.OfferSummaryDTO;
 import bg.softuni.mobilele.model.entity.ModelEntity;
 import bg.softuni.mobilele.model.entity.OfferEntity;
 import bg.softuni.mobilele.model.entity.UserEntity;
+import bg.softuni.mobilele.model.entity.UserRoleEntity;
+import bg.softuni.mobilele.model.enums.UserRoleEnum;
 import bg.softuni.mobilele.repository.ModelRepository;
 import bg.softuni.mobilele.repository.OfferRepository;
 import bg.softuni.mobilele.repository.UserRepository;
@@ -16,7 +18,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -79,13 +80,16 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public Optional<OfferDetailDTO> getOfferDetail(UUID offerUUID) {
+    public Optional<OfferDetailDTO> getOfferDetail(UUID offerUUID, UserDetails viewer) {
 
         return offerRepository.findByUuid(offerUUID)
                 .map(offerEntity -> {
                     OfferDetailDTO offerDetailDTO = modelMapper.map(offerEntity, OfferDetailDTO.class);
                     offerDetailDTO.setBrand(offerEntity.getModel().getBrand().getName());
                     offerDetailDTO.setModel(offerEntity.getModel().getName());
+                    offerDetailDTO.setViewerIsOwner(isOwner(offerEntity, viewer));
+                    offerDetailDTO.setSeller(String.format(offerEntity.getSeller().getFirstName()
+                    + " " + offerEntity.getSeller().getLastName()));
                     return offerDetailDTO;
                 });
     }
@@ -94,5 +98,28 @@ public class OfferServiceImpl implements OfferService {
     @Transactional
     public void deleteOffer(UUID offerUUID) {
         offerRepository.deleteByUuid(offerUUID);
+    }
+
+
+    private boolean isOwner (OfferEntity offerEntity, UserDetails viewer) {
+
+        if (viewer == null) {
+            return false;
+        }
+
+        UserEntity userEntity = userRepository.findByEmail(viewer.getUsername()).orElseThrow(() ->
+                new IllegalArgumentException("Unknown user..."));
+
+        if (isAdmin(userEntity)) {
+            return true;
+        }
+
+        return offerEntity.getSeller().equals(userEntity);
+    }
+
+    private boolean isAdmin(UserEntity userEntity) {
+        return userEntity.getRoles().stream()
+                .map(UserRoleEntity::getRole)
+                .anyMatch(UserRoleEnum.ADMIN::equals);
     }
 }

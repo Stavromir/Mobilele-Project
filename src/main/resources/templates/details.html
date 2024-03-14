@@ -41,10 +41,13 @@
                     </div>
                     <div class="card-text"><span>• Offer created - TODO</span></div>
                     <div class="card-text"><span>• Offer modified - TODO</span></div>
-                    <div class="card-text"><span>• Seller - First and Last name - TODO</span></div>
+                    <div class="card-text">
+                        <span>• Seller - </span>
+                        <th:block th:text="*{seller}"></th:block>
+                    </div>
                 </li>
             </ul>
-            <div class="card-body" sec:authorize="isAuthenticated()">
+            <div class="card-body" th:if="*{viewerIsOwner}">
                 <form th:method="DELETE"
                         th:action="@{/offer/{offerUUID}(offerUUID=*{uuid})}">
                     <button class="btn-link card-link" >Delete</button>
