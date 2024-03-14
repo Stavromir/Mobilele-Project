@@ -22,6 +22,7 @@ public class OfferEntity extends BaseEntity {
     private long mileage;
     private BigDecimal price;
     private int year;
+    private UserEntity seller;
 
     public OfferEntity() {
         super();
@@ -109,6 +110,16 @@ public class OfferEntity extends BaseEntity {
 
     public OfferEntity setYear(int year) {
         this.year = year;
+        return this;
+    }
+
+    @ManyToOne
+    public UserEntity getSeller() {
+        return seller;
+    }
+
+    public OfferEntity setSeller(UserEntity seller) {
+        this.seller = seller;
         return this;
     }
 }

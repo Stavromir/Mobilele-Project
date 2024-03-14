@@ -1,6 +1,5 @@
 package bg.softuni.mobilele.web;
 
-import bg.softuni.mobilele.model.dto.BrandDto;
 import bg.softuni.mobilele.model.dto.CreateOfferDto;
 import bg.softuni.mobilele.model.dto.OfferDetailDTO;
 import bg.softuni.mobilele.model.enums.EngineEnum;
@@ -8,13 +7,14 @@ import bg.softuni.mobilele.service.BrandService;
 import bg.softuni.mobilele.service.OfferService;
 import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -51,7 +51,8 @@ public class OfferController {
     @PostMapping("/add")
     public String add(@Valid CreateOfferDto createOfferDto,
                       BindingResult bindingResult,
-                      RedirectAttributes redirectAttributes) {
+                      RedirectAttributes redirectAttributes,
+                      @AuthenticationPrincipal UserDetails seller) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes
@@ -62,9 +63,9 @@ public class OfferController {
             return "redirect:add";
         }
 
-        UUID newOfferUUID = offerService.createOffer(createOfferDto);
+        UUID newOfferUUID = offerService.createOffer(createOfferDto, seller);
 
-        return "redirect:/offer/" + newOfferUUID    ;
+        return "redirect:/offer/" + newOfferUUID;
     }
 
     @GetMapping("/{uuid}")
