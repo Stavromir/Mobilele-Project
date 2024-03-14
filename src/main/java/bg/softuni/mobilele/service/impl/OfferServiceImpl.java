@@ -87,7 +87,7 @@ public class OfferServiceImpl implements OfferService {
                     OfferDetailDTO offerDetailDTO = modelMapper.map(offerEntity, OfferDetailDTO.class);
                     offerDetailDTO.setBrand(offerEntity.getModel().getBrand().getName());
                     offerDetailDTO.setModel(offerEntity.getModel().getName());
-                    offerDetailDTO.setViewerIsOwner(isOwner(offerEntity, viewer));
+                    offerDetailDTO.setViewerIsOwner(isOwner(offerEntity.getUuid(), viewer));
                     offerDetailDTO.setSeller(String.format(offerEntity.getSeller().getFirstName()
                     + " " + offerEntity.getSeller().getLastName()));
                     return offerDetailDTO;
@@ -100,10 +100,12 @@ public class OfferServiceImpl implements OfferService {
         offerRepository.deleteByUuid(offerUUID);
     }
 
+    @Override
+    public boolean isOwner(UUID offerUUID, UserDetails viewer) {
 
-    private boolean isOwner (OfferEntity offerEntity, UserDetails viewer) {
+        OfferEntity offerEntity = offerRepository.findByUuid(offerUUID).orElse(null);
 
-        if (viewer == null) {
+        if (offerEntity == null || viewer == null) {
             return false;
         }
 
@@ -116,6 +118,12 @@ public class OfferServiceImpl implements OfferService {
 
         return offerEntity.getSeller().equals(userEntity);
     }
+
+
+//    private boolean isOwner (OfferEntity offerEntity, UserDetails viewer) {
+//
+//
+//    }
 
     private boolean isAdmin(UserEntity userEntity) {
         return userEntity.getRoles().stream()

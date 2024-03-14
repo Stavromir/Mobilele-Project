@@ -7,6 +7,7 @@ import bg.softuni.mobilele.service.BrandService;
 import bg.softuni.mobilele.service.OfferService;
 import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -70,10 +71,10 @@ public class OfferController {
 
     @GetMapping("/{uuid}")
     public String details(@PathVariable("uuid") UUID uuid, Model model,
-                          @AuthenticationPrincipal UserDetails viewer) {
+                          @AuthenticationPrincipal UserDetails principal) {
 
         OfferDetailDTO offerDetailDTO = offerService
-                .getOfferDetail(uuid, viewer)
+                .getOfferDetail(uuid, principal)
                 .orElseThrow(() -> new ObjectNotFoundException("Offer with " + uuid + " not found"));
 
         model.addAttribute("offer", offerDetailDTO);
@@ -81,8 +82,11 @@ public class OfferController {
         return "details";
     }
 
+
+    @PreAuthorize("@offerServiceImpl.isOwner(#uuid, #principal)")
     @DeleteMapping("/{uuid}")
-    public String delete(@PathVariable("uuid") UUID uuid) {
+    public String delete(@PathVariable("uuid") UUID uuid,
+                         @AuthenticationPrincipal UserDetails principal) {
 
         offerService.deleteOffer(uuid);
         return "redirect:/offers/all";
