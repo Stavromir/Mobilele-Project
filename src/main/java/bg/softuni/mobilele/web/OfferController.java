@@ -90,9 +90,5 @@ public class OfferController {
 
         offerService.deleteOffer(uuid);
         return "redirect:/offers/all";
-
     }
-
-
-
 }

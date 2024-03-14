@@ -34,8 +34,9 @@ public class OfferEntity extends BaseEntity {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public OfferEntity setUuid(UUID uuid) {
         this.uuid = uuid;
+        return this;
     }
 
     public String getDescription() {
@@ -47,7 +48,7 @@ public class OfferEntity extends BaseEntity {
         return this;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     public ModelEntity getModel() {
         return model;
     }
@@ -72,7 +73,7 @@ public class OfferEntity extends BaseEntity {
         return transmission;
     }
 
-    public OfferEntity setTransmission(TransmissionEnum transmission) {
+    public OfferEntity  setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
         return this;
     }

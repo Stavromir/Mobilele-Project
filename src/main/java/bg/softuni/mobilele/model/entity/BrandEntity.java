@@ -24,8 +24,9 @@ public class BrandEntity extends BaseEntity {
         return name;
     }
 
-    public void setName(String name) {
+    public BrandEntity setName(String name) {
         this.name = name;
+        return this;
     }
 
     @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
@@ -33,7 +34,8 @@ public class BrandEntity extends BaseEntity {
         return models;
     }
 
-    public void setModels(List<ModelEntity> models) {
+    public BrandEntity setModels(List<ModelEntity> models) {
         this.models = models;
+        return this;
     }
 }
