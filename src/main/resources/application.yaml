@@ -41,6 +41,10 @@ open.exchange.rates:
   symbols: EUR,BGN
   enabled: false
 
+google.recaptcha:
+  key: ${RECAPTCHA_SITE_KEY:test}
+  secret: ${RECAPTCHA_SECRET_KEY:test}
+
 
 mail:
   mobilele: "mobilele@example.com"

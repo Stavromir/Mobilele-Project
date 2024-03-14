@@ -1,16 +1,15 @@
 package bg.softuni.mobilele.web;
 
+import bg.softuni.mobilele.model.dto.ReCaptchaResponseDTO;
 import bg.softuni.mobilele.model.dto.UserRegistrationDto;
+import bg.softuni.mobilele.service.ReCaptchaService;
 import bg.softuni.mobilele.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -18,10 +17,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserRegistrationController {
 
     private final UserService userService;
+    private final ReCaptchaService reCaptchaService;
 
     @Autowired
-    public UserRegistrationController(UserService userService) {
+    public UserRegistrationController(UserService userService, ReCaptchaService reCaptchaService) {
         this.userService = userService;
+        this.reCaptchaService = reCaptchaService;
     }
 
 
@@ -37,8 +38,9 @@ public class UserRegistrationController {
 
     @PostMapping("/register")
     public String registerConfirm (@Valid UserRegistrationDto userRegistrationDto,
-                            BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes){
+                                   BindingResult bindingResult,
+                                   RedirectAttributes redirectAttributes,
+                                   @RequestParam("g-recaptcha-response") String reCaptchaResponse){
 
         //todo Registration email with activation link
 
@@ -50,6 +52,18 @@ public class UserRegistrationController {
 
             return "redirect:/users/register";
         }
+
+
+        boolean isBot = !reCaptchaService
+                .verify(reCaptchaResponse)
+                        .map(ReCaptchaResponseDTO::isSuccess)
+                                .orElse(false);
+
+        if (isBot) {
+            return "redirect:/home";
+        }
+
+
 
         userService.registerUser(userRegistrationDto);
 
