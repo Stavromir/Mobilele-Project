@@ -7,6 +7,7 @@ import bg.softuni.mobilele.model.entity.ModelEntity;
 import bg.softuni.mobilele.model.entity.OfferEntity;
 import bg.softuni.mobilele.repository.ModelRepository;
 import bg.softuni.mobilele.repository.OfferRepository;
+import bg.softuni.mobilele.service.MonitoringService;
 import bg.softuni.mobilele.service.OfferService;
 import bg.softuni.mobilele.service.exception.ObjectNotFoundException;
 import jakarta.transaction.Transactional;
@@ -24,13 +25,16 @@ public class OfferServiceImpl implements OfferService {
     private final OfferRepository offerRepository;
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
+    private final MonitoringService monitoringService;
 
     public OfferServiceImpl(OfferRepository offerRepository,
                             ModelRepository modelRepository,
-                            ModelMapper modelMapper) {
+                            ModelMapper modelMapper,
+                            MonitoringService monitoringService) {
         this.offerRepository = offerRepository;
         this.modelRepository = modelRepository;
         this.modelMapper = modelMapper;
+        this.monitoringService = monitoringService;
     }
 
     @Override
@@ -51,6 +55,8 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public Page<OfferSummaryDTO> getAllOffers(Pageable pageable) {
+
+        monitoringService.logOfferSearch();
 
         return offerRepository.findAll(pageable)
                 .map(offerEntity -> {
