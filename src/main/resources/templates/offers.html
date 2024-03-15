@@ -60,22 +60,41 @@
             <ul class="pagination justify-content-center">
 
                 <!-- First page logic -->
-                <li class="page-item" th:classappend="${offers.isFirst() ? 'disabled' : ''}">
-                    <a th:if="${offers.isFirst()}" class="page-link" href="#" tabindex="-1">First</a>
-                    <a th:unless="${offers.isFirst()}" class="page-link" th:href="@{/offers/all(size=${offers.getSize()})}" tabindex="-1">First</a>
+                <li class="page-item" th:classappend="${offers.first ? 'disabled' : ''}">
+                    <a th:if="${offers.first}" class="page-link" href="#" tabindex="-1">First</a>
+                    <a th:unless="${offers.first}" class="page-link" th:href="@{/offers/all(size=${offers.size})}" tabindex="-1">First</a>
                 </li>
                 <!-- First page logic -->
 
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <!-- Previous page logic -->
+                <li class="page-item" th:classappend="${offers.number == 0 ? 'disabled' : ''}">
+                    <a th:if="${offers.number == 0}" class="page-link" href="#" tabindex="-1">Previous</a>
+                    <a th:unless="${offers.number == 0}" class="page-link" th:href="@{/offers/all(size=${offers.size}, page=${offers.number - 1})}" tabindex="-1">Previous</a>
+                </li>
+                <!-- Previous page logic -->
+
+                <!-- Dynamic page numbers -->
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, offers.totalPages - 1)}" th:classappend="${i == offers.number ? 'active' : ''}">
+                    <a class="page-link" th:href="@{/offers/all(size=${offers.size}, page=${i})}" th:text="${i + 1}"></a>
+                </li>
+                <!-- Dynamic page numbers -->
+
+                <!-- Next page logic -->
+                <li class="page-item" th:classappend="${offers.number + 1 == offers.totalPages ? 'disabled' : ''}">
+                    <a th:if="${offers.number + 1 == offers.totalPages}" class="page-link" href="#" tabindex="-1">Next</a>
+                    <a th:unless="${offers.number + 1 == offers.totalPages}" class="page-link" th:href="@{/offers/all(size=${offers.size}, page=${offers.number + 1})}" tabindex="-1">Next</a>
+                </li>
+                <!-- Next page logic -->
 
                 <!-- Last page logic -->
-                <li class="page-item" th:classappend="${offers.isLast() ? 'disabled' : ''}">
-                    <a th:if="${offers.isLast()}" class="page-link" href="#">Last</a>
-                    <a th:unless="${offers.isLast()}" class="page-link" th:href="@{/offers/all(size=${offers.getSize()}, page=${offers.getTotalPages() - 1})}">Last</a>
+                <li class="page-item" th:classappend="${offers.last ? 'disabled' : ''}">
+                    <a th:if="${offers.last}" class="page-link" href="#">Last</a>
+                    <a th:unless="${offers.last}" class="page-link" th:href="@{/offers/all(size=${offers.size}, page=${offers.totalPages - 1})}">Last</a>
                 </li>
                 <!-- Last page logic -->
+
             </ul>
+
         </div>
     </div>
 </div>
