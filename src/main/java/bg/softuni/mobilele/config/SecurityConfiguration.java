@@ -38,6 +38,8 @@ public class SecurityConfiguration {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         // Allow actuator endpoints
                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+                        // Allow endpoints for open-api (swagger)
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         // Allow anyone to see the home page, the registration page and the login form
                         .requestMatchers("/", "/home").permitAll()
                         .requestMatchers("/users/login", "/users/register", "/users/login-error").anonymous()
