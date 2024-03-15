@@ -23,7 +23,7 @@ public class AllOffersController {
     @GetMapping("/all")
     public String all(Model model,
                       @PageableDefault(
-                              size = 5,
+                              size = 2,
                               sort = "uuid"
                       )
                       Pageable pageable) {
