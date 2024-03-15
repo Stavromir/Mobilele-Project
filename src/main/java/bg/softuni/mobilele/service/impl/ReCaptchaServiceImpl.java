@@ -5,6 +5,7 @@ import bg.softuni.mobilele.model.dto.ReCaptchaResponseDTO;
 import bg.softuni.mobilele.service.ReCaptchaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -13,6 +14,7 @@ import org.springframework.web.util.UriBuilder;
 import java.net.URI;
 import java.util.Optional;
 
+@Service
 public class ReCaptchaServiceImpl implements ReCaptchaService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReCaptchaServiceImpl.class);

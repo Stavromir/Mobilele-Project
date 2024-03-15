@@ -37,7 +37,7 @@ public class MonitoringAspect {
         long timeOut = annotation.timeInMillis();
 
         StopWatch stopWatch = new StopWatch();
-        stopWatch.stop();
+        stopWatch.start();
 
         //TODO timeout logic
         var proceed = pjp.proceed();
