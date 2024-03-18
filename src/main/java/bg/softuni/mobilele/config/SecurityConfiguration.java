@@ -4,6 +4,7 @@ import bg.softuni.mobilele.model.enums.UserRoleEnum;
 import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.service.impl.MobileleUserDetailService;
 
+import bg.softuni.mobilele.service.oauth.OAuthSuccessHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -23,9 +24,12 @@ public class SecurityConfiguration {
 
 
     private final String rememberMeKey;
+    private final OAuthSuccessHandler oAuthSuccessHandler;
 
-    public SecurityConfiguration(@Value("${mobilele.remember.me.key}") String rememberMe) {
+    public SecurityConfiguration(@Value("${mobilele.remember.me.key}") String rememberMe,
+                                 OAuthSuccessHandler oAuthSuccessHandler) {
         this.rememberMeKey = rememberMe;
+        this.oAuthSuccessHandler = oAuthSuccessHandler;
     }
 
 
@@ -81,6 +85,10 @@ public class SecurityConfiguration {
                             .rememberMeCookieName("rememberme")
                             // Valid one week
                             .tokenValiditySeconds(604800);
+                }
+        ).oauth2Login(
+                oauth2Login -> {
+                    oauth2Login.successHandler(oAuthSuccessHandler);
                 }
         );
 
