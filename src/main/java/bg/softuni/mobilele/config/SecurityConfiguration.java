@@ -2,6 +2,7 @@ package bg.softuni.mobilele.config;
 
 import bg.softuni.mobilele.model.enums.UserRoleEnum;
 import bg.softuni.mobilele.repository.UserRepository;
+import bg.softuni.mobilele.service.UserService;
 import bg.softuni.mobilele.service.impl.MobileleUserDetailService;
 
 import bg.softuni.mobilele.service.oauth.OAuthSuccessHandler;
@@ -24,17 +25,15 @@ public class SecurityConfiguration {
 
 
     private final String rememberMeKey;
-    private final OAuthSuccessHandler oAuthSuccessHandler;
 
-    public SecurityConfiguration(@Value("${mobilele.remember.me.key}") String rememberMe,
-                                 OAuthSuccessHandler oAuthSuccessHandler) {
+    public SecurityConfiguration(@Value("${mobilele.remember.me.key}") String rememberMe) {
         this.rememberMeKey = rememberMe;
-        this.oAuthSuccessHandler = oAuthSuccessHandler;
     }
 
 
     @Bean
-    public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain filterChain (HttpSecurity httpSecurity,
+                                            OAuthSuccessHandler oAuthSuccessHandler) throws Exception {
         httpSecurity.authorizeHttpRequests(
                 // Define which URLs are visible by which users
                 authorizeRequest -> authorizeRequest
