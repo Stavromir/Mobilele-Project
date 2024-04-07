@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mobilele?createDatabaseIfNotExist=true
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/mobilele?createDatabaseIfNotExist=true
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD:}
   jpa:
@@ -15,6 +15,15 @@ spring:
   sql:
     init:
       mode: never
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: 0aff886e50a798d08585
+            client-secret: ${GITHUB_SECRET:}
+            scope: user:email
+
   mvc:
     hiddenmethod:
       filter:
